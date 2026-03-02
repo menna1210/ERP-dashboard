@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { inventoryService, Store } from "../../../services/inventoryService";
+import { Axios, AxiosError } from "axios";
 
 export const useInventory = () => {
   const [stores, setStores] = useState<Store[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  
+  const [error, setError] = useState("");
   const [editId, setEditId] = useState<number | null>(null);
   const [editValue, setEditValue] = useState<string>("");
 
   const fetchStores = async () => {
     try {
       setLoading(true);
-      const data = await inventoryService.getAllStores();
-      setStores(data);
+      const result = await inventoryService.getAllStores();
+      setStores(result || []);
     } catch (err) {
-      console.error("فشل تحميل البيانات:", err);
+      setError((err as AxiosError<Error>).response?.data.message || "حدث خطأ")
     } finally {
       setLoading(false);
     }
@@ -26,11 +27,11 @@ export const useInventory = () => {
 
   const handleAddStore = async (name: string) => {
     try {
-      await inventoryService.createStore(name);
-      await fetchStores(); 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const payload = { name };
+      const response = await inventoryService.createStore(payload);
+      await fetchStores();
     } catch (err) {
-      alert("حدث خطأ أثناء إضافة المخزن");
+      throw Error((err as AxiosError<Error>).response?.data.message);
     }
   };
 
@@ -39,32 +40,24 @@ export const useInventory = () => {
       try {
         await inventoryService.deleteStore(id);
         await fetchStores();
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
-        alert("فشل الحذف");
+        alert("فشل التحديث: " + (err));
       }
     }
   };
 
-  const handleUpdate = async (id: number) => {
+  const handleUpdate = async (id: number,editValue:Partial<Store>) => {
     try {
       await inventoryService.updateStore(id, editValue);
       setEditId(null);
       await fetchStores();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
-      alert("فشل التعديل");
+    } catch (err: any) {
+      alert("فشل التحديث: " + (err?.message || "حدث خطأ غير معروف"));
     }
-  };
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleString("ar-EG", {
-      day: "numeric", month: "long", year: "numeric"
-    });
   };
 
   return {
     stores, loading, editId, setEditId, editValue, setEditValue,
-    handleAddStore, handleDelete, handleUpdate, formatDate
+    fetchStores, handleAddStore, handleDelete, handleUpdate
   };
 };

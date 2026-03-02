@@ -4,10 +4,9 @@ import { links } from "../links/links";
 
 export default function SideBar() {
   // !
-  const [openMenuId, setOpenMenuId] = useState(null);
-
+const [openMenuId, setOpenMenuId] = useState<number | null>(null);
   // ! 
-  const toggleMenu = (id) => {
+ const toggleMenu = (id: number) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
 

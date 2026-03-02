@@ -29,7 +29,7 @@ export default function SideBar({ isOpen, onClose }: SideBarProps) {
     localStorage.removeItem("userToken");
     navigate("/login");
     onClose();
-  };
+  };  
 
   return (
     <>
@@ -39,12 +39,12 @@ export default function SideBar({ isOpen, onClose }: SideBarProps) {
         onClick={onClose}
       />
 
-      <nav className={`fixed top-0 left-0 h-full w-[280px] bg-white z-50 shadow-2xl transition-transform duration-300 ease-in-out p-6 flex flex-col 
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <nav className={`fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl transition-transform duration-300 ease-in-out p-6 flex flex-col 
+        ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
         
         <button 
           onClick={onClose} 
-          className="absolute right-4 top-4 p-2 text-slate-400 hover:bg-slate-100 rounded-full transition-all"
+          className="absolute left-4 top-4 p-2 text-slate-400 hover:bg-slate-100 rounded-full transition-all"
         >
           <FaTimes size={18} />
         </button>
@@ -77,7 +77,7 @@ export default function SideBar({ isOpen, onClose }: SideBarProps) {
             className="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-semibold hover:bg-red-50 rounded-2xl transition-all active:scale-95"
           >
             <FaSignOutAlt size={20} />
-            <span>Sign Out</span>
+            <span>تسجيل خروج</span>
           </button>
         </div>
       </nav>

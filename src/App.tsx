@@ -5,9 +5,10 @@ import InventoryPageOne from "./features/inventory/inventoryPageOne";
 import ProductsPageOne from "./features/products/productsPageOne";
 import StockPageOne from "./features/stockTransfer/stockpageOne";
 import Layout from "./pages/Layout";
-import ProtectedRoute from "./routes/protectedRoutes";
-import Login from "./features/auth/pages/Login";
-import PublicRoutes from "./routes/publicRoutes"; 
+import { ProtectedRoute } from "./routes/protectedRoutes";
+import { PublicRoutes } from "./routes/publicRoutes";
+import { Login } from "./features/auth/pages/Login";
+
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         </PublicRoutes>
       } />
 
-      <Route element={<ProtectedRoute/>}>
+      <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="/home" />} /> 
           <Route path="home" element={<Home />} />

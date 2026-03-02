@@ -12,7 +12,6 @@ export default function NavBar({ onMenuClick }: { onMenuClick: () => void }) {
           <FaBars size={20} /> 
         </button>
 
-        {/* Logo Container */}
         <div className="flex items-center gap-3 border-l border-slate-700 pl-4 group cursor-pointer">
           <div className="bg-blue-600 p-2 rounded-lg text-white shadow-lg shadow-blue-500/20 group-hover:bg-blue-500 transition-colors">
             <FaThLarge size={16} />
@@ -27,7 +26,7 @@ export default function NavBar({ onMenuClick }: { onMenuClick: () => void }) {
         <FaSearch size={14} className="text-slate-500" />
         <input 
           type="text" 
-          placeholder="Search..." 
+          placeholder="ابحث ..." 
           className="bg-transparent border-none focus:ring-0 text-sm ml-2 placeholder:text-slate-500 w-full outline-none"
         />
       </div>
@@ -40,7 +39,7 @@ export default function NavBar({ onMenuClick }: { onMenuClick: () => void }) {
 
         <div className="flex items-center gap-3 pl-3 border-l border-slate-700 ml-1 cursor-pointer group">
           <div className="hidden md:flex flex-col items-end leading-tight">
-            <span className="text-[13px] font-semibold text-white group-hover:text-blue-400 transition-colors text-nowrap">Admin User</span>
+            <span className="text-[13px] font-semibold text-white group-hover:text-blue-400 transition-colors text-nowrap">المستخدم الرئيسي</span>
           </div>
           <div className="w-9 h-9 bg-slate-800 rounded-full border border-slate-700 flex items-center justify-center group-hover:border-blue-500 transition-all overflow-hidden bg-gradient-to-tr from-slate-800 to-slate-700">
             <FaUser size={16} className="text-slate-400 group-hover:text-blue-400" />

@@ -1,29 +1,30 @@
-import { axiosConfig, APIs } from "../utils/axiosConfig";
+import { APIs, axiosConfig } from "../utils/axiosConfig";
 
 export interface Store {
   id: number;
   name: string;
-  created_at: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export const inventoryService = {
-  getAllStores: async () => {
+  getAllStores: async (): Promise<Store[]> => {
     const response = await axiosConfig.get(APIs.inventories);
-    return response.data.data as Store[]; 
+    const stores = response.data?.data || response.data;
+    return Array.isArray(stores) ? stores : [];
   },
 
-  createStore: async (name: string) => {
-    const response = await axiosConfig.post(APIs.inventories, { name });
+  createStore: async (payload: { name: string }): Promise<any> => {
+    const response = await axiosConfig.post(APIs.inventories, payload);
     return response.data;
   },
 
-  updateStore: async (id: number, name: string) => {
-    const response = await axiosConfig.put(`${APIs.inventories}/${id}`, { name });
+  updateStore: async (id: number, data: Partial<Store>): Promise<any> => {
+    const response = await axiosConfig.put(`${APIs.inventories}/${id}`,data);
     return response.data;
   },
 
-  deleteStore: async (id: number) => {
-    const response = await axiosConfig.delete(`${APIs.inventories}/${id}`);
-    return response.data;
+  deleteStore: async (id: number): Promise<void> => {
+    await axiosConfig.delete(`${APIs.inventories}/${id}`);
   }
 };

@@ -1,10 +1,14 @@
-import { Navigate} from "react-router-dom";
+import { Navigate, Outlet} from "react-router-dom";
+import { ReactNode } from "react";
 
-export default function ProtectedRoute({ children }) {
+interface Props {
+  children?: ReactNode;
+}
+export  function ProtectedRoute({ children }: Props) {
   const isAuthenticated = localStorage.getItem("userToken");
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
-  return children;
+  return children ? <>{children}</> : <Outlet />;
 }

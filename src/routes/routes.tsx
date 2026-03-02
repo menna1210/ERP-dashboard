@@ -6,10 +6,10 @@ import Layout from "../pages/Layout";
 import InventoryPageOne from "../features/inventory/inventoryPageOne";
 import StockPageOne from "../features/stockTransfer/stockpageOne";
 import ProductsPageOne from "../features/products/productsPageOne";
-import Login from "../features/auth/pages/Login";
-import ProtectedRoute from "./protectedRoutes";
-import PublicRoutes from "./publicRoutes"
-export const routes = createBrowserRouter([
+import { Login } from "../features/auth/pages/Login";
+import { ProtectedRoute } from "./protectedRoutes";
+import { PublicRoutes } from "./publicRoutes"
+ export const appRouter = createBrowserRouter([
   {
  
     path: "/login",

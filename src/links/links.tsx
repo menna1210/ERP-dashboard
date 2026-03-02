@@ -1,12 +1,12 @@
 export const links = [
   {
     id: 1,
-    title: "home",
+    title: "الصفحه الرئيسيه",
     path: "/",
   },
   {
     id: 2,
-    title: "Inventory",
+    title: "ادارة المخازن",
     path: "/inventory",
     Children: [
       { id: 3, title: "One page inventory", path: "/inventory/page-one" },
@@ -16,7 +16,7 @@ export const links = [
   },
   {
     id: 3,
-    title: "Products",
+    title: "المنتجات",
     path: "/products",
     Children: [
       { id: 6, title: "One page products", path: "/products/page-one" },
@@ -26,7 +26,7 @@ export const links = [
   },
   {
     id: 4,
-    title: "Stock Transfer",
+    title: "نقل المخازن",
     path: "/stock-transfer",
     Children: [
       {
